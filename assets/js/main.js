@@ -106,7 +106,7 @@ function intervalImages() {
 
         console.log(currentImage);
 
-    }, 4000);
+    }, 3000);
 }
 
 for (let i = 0; i < characters.length; i++) {
@@ -165,17 +165,21 @@ startStopButton.addEventListener('click', function () {
 
         clearInterval(intervalright);
         intervalright = null;
+
         startStopButton.classList.remove('btn-danger');
         startStopButton.classList.add('btn-success');
-        startStopButton.innerText = 'Start';
+        startStopButton.innerText = 'start';
+
         console.log('intervallo terminato')
 
     } else {
 
         intervalImages();
+
         startStopButton.classList.remove('btn-success');
         startStopButton.classList.add('btn-danger');
-        startStopButton.innerText = 'Stop';
+        startStopButton.innerText = 'stop';
+
         console.log('intervallo ripreso')
     }
 })
@@ -186,11 +190,21 @@ reverseButton.addEventListener('click', function () {
     if (reverseButtonclicked === true) {
 
         reverseButtonclicked = false;
+
+        reverseButton.classList.remove('btn-warning');
+        reverseButton.classList.add('btn-info');
+        reverseButton.innerText = 'normal';
+
         console.log('ho ripristinato la direzione');
 
     } else {
 
         reverseButtonclicked = true;
+
+        reverseButton.classList.remove('btn-info');
+        reverseButton.classList.add('btn-warning');
+        reverseButton.innerText = 'reverse';
+
         console.log('ho invertito la direzione');
     }
 
