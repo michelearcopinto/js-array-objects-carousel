@@ -88,7 +88,6 @@ function matchImageAndSelection() {
 
 function intervalImages() {
 
-
     intervalright = setInterval(function () {
 
         if (reverseButtonclicked === false) {
@@ -106,7 +105,7 @@ function intervalImages() {
 
         console.log(currentImage);
 
-    }, 3000);
+    }, 5000);
 }
 
 for (let i = 0; i < characters.length; i++) {

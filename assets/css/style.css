@@ -2,6 +2,12 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+body>div {
+    max-width: 1205px;
+    margin-inline: auto;
+}
+
+
 .carousel-control-prev,
 .carousel-control-next {
     opacity: 100%;
