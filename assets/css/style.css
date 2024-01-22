@@ -26,6 +26,7 @@ body {
     background-position: center;
     background-size: cover;
     border: 1px solid white;
+    transition: all 0.7s;
 }
 
 .thumbnail:hover {

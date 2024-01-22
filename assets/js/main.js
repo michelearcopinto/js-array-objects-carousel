@@ -1,8 +1,13 @@
-const backgroundImage = document.getElementById('backgroundImage');
 const prevArrow = document.getElementById('prevArrow');
 const nextArrow = document.getElementById('nextArrow');
+
+const backgroundImage = document.getElementById('backgroundImage');
 const nameCharacter = document.getElementById('nameCharacter');
 const infoCharacter = document.getElementById('infoCharacter');
+
+const startStopButton = document.getElementById('startStopButton');
+const reverseButton = document.getElementById('reverseButton');
+
 const bottomImages = document.getElementById('bottomImages');
 
 const characters = [
@@ -36,11 +41,35 @@ const characters = [
 let thumbnailArray = [];
 
 let currentImage = 0;
-let thumbnailImage, divContainer;
+let thumbnailImage, divContainer, intervalright;
+let reverseButtonclicked = false;
 
-backgroundImage.setAttribute('src', characters[currentImage].path);
-nameCharacter.innerText = characters[currentImage].name;
-infoCharacter.innerText = characters[currentImage].info;
+function changeImage() {
+
+    backgroundImage.setAttribute('src', characters[currentImage].path);
+    nameCharacter.innerText = characters[currentImage].name;
+    infoCharacter.innerText = characters[currentImage].info;
+}
+
+function changeImageUp() {
+
+    currentImage === 4 ? currentImage = 0 : currentImage++;
+
+    backgroundImage.setAttribute('src', characters[currentImage].path);
+    nameCharacter.innerText = characters[currentImage].name;
+    infoCharacter.innerText = characters[currentImage].info;
+}
+
+function changeImageDown() {
+
+    currentImage === 0 ? currentImage = 4 : currentImage--;
+
+    backgroundImage.setAttribute('src', characters[currentImage].path);
+    nameCharacter.innerText = characters[currentImage].name;
+    infoCharacter.innerText = characters[currentImage].info;
+}
+
+changeImage();
 
 function matchImageAndSelection() {
 
@@ -53,9 +82,31 @@ function matchImageAndSelection() {
         } else {
 
             thumbnailArray[i].classList.remove('selected');
-
         }
     }
+}
+
+function intervalImages() {
+
+
+    intervalright = setInterval(function () {
+
+        if (reverseButtonclicked === false) {
+
+            changeImageUp();
+
+        } else {
+
+            changeImageDown();
+        }
+
+        matchImageAndSelection();
+
+        console.log('intervallo in corso');
+
+        console.log(currentImage);
+
+    }, 4000);
 }
 
 for (let i = 0; i < characters.length; i++) {
@@ -70,9 +121,7 @@ for (let i = 0; i < characters.length; i++) {
 
         currentImage = thumbnailArray.indexOf(this);
 
-        backgroundImage.setAttribute('src', characters[currentImage].path);
-        nameCharacter.innerText = characters[currentImage].name;
-        infoCharacter.innerText = characters[currentImage].info;
+        changeImage();
 
         matchImageAndSelection();
 
@@ -88,11 +137,7 @@ matchImageAndSelection();
 
 nextArrow.addEventListener('click', function () {
 
-    currentImage === 4 ? currentImage = 0 : currentImage++;
-
-    backgroundImage.setAttribute('src', characters[currentImage].path);
-    nameCharacter.innerText = characters[currentImage].name;
-    infoCharacter.innerText = characters[currentImage].info;
+    changeImageUp();
 
     matchImageAndSelection();
 
@@ -101,15 +146,54 @@ nextArrow.addEventListener('click', function () {
 
 prevArrow.addEventListener('click', function () {
 
-    currentImage === 0 ? currentImage = 4 : currentImage--;
-
-    backgroundImage.setAttribute('src', characters[currentImage].path);
-    nameCharacter.innerText = characters[currentImage].name;
-    infoCharacter.innerText = characters[currentImage].info;
+    changeImageDown();
 
     matchImageAndSelection();
 
     console.log(currentImage);
+})
+
+setTimeout(function () {
+
+    intervalImages();
+
+}, 3000);
+
+startStopButton.addEventListener('click', function () {
+
+    if (intervalright) {
+
+        clearInterval(intervalright);
+        intervalright = null;
+        startStopButton.classList.remove('btn-danger');
+        startStopButton.classList.add('btn-success');
+        startStopButton.innerText = 'Start';
+        console.log('intervallo terminato')
+
+    } else {
+
+        intervalImages();
+        startStopButton.classList.remove('btn-success');
+        startStopButton.classList.add('btn-danger');
+        startStopButton.innerText = 'Stop';
+        console.log('intervallo ripreso')
+    }
+})
+
+
+reverseButton.addEventListener('click', function () {
+
+    if (reverseButtonclicked === true) {
+
+        reverseButtonclicked = false;
+        console.log('ho ripristinato la direzione');
+
+    } else {
+
+        reverseButtonclicked = true;
+        console.log('ho invertito la direzione');
+    }
+
 })
 
 console.log(currentImage);
