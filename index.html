@@ -12,29 +12,28 @@
 </head>
 
 <body>
-    <div id="carouselExampleCaptions" class="carousel slide m-5 rounded-4 overflow-hidden">
+    <div id="carouselExampleCaptions" class="carousel slide mx-5 mt-5 rounded-4 overflow-hidden">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img id="backgroundImage" class="d-block w-100" alt="carousel-image">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5 id="nameCharacter" class="fw-bold fs-1 text-uppercase">First slide label</h5>
-                    <p id="infoCharacter" class="fw-bold">Some representative placeholder content for the first slide.
-                    </p>
+                <div class="carousel-caption d-none d-md-block rounded-3">
+                    <h5 id="nameCharacter" class="fw-bold fs-1 text-uppercase"></h5>
+                    <p id="infoCharacter" class="fw-bold"></p>
                 </div>
             </div>
         </div>
         <button id="prevArrow" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
             data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="carousel-control-prev-icon p-4 rounded-2" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
         <button id="nextArrow" class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
             data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="carousel-control-next-icon p-4 rounded-2" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
-        <div id="bottomImages"></div>
     </div>
+    <div id="bottomImages" class="d-flex mx-5 mb-5 mt-3 rounded-4 overflow-hidden shadow-lg"></div>
 
     <script src="./assets/js/main.js"></script>
 </body>

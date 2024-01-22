@@ -3,6 +3,7 @@ const prevArrow = document.getElementById('prevArrow');
 const nextArrow = document.getElementById('nextArrow');
 const nameCharacter = document.getElementById('nameCharacter');
 const infoCharacter = document.getElementById('infoCharacter');
+const bottomImages = document.getElementById('bottomImages');
 
 const characters = [
     {
@@ -32,12 +33,58 @@ const characters = [
     }
 ];
 
+let thumbnailArray = [];
+
 let currentImage = 0;
+let thumbnailImage, divContainer;
 
 backgroundImage.setAttribute('src', characters[currentImage].path);
 nameCharacter.innerText = characters[currentImage].name;
 infoCharacter.innerText = characters[currentImage].info;
 
+function matchImageAndSelection() {
+
+    for (let i = 0; i < thumbnailArray.length; i++) {
+
+        if (i === currentImage) {
+
+            thumbnailArray[currentImage].classList.add('selected');
+
+        } else {
+
+            thumbnailArray[i].classList.remove('selected');
+
+        }
+    }
+}
+
+for (let i = 0; i < characters.length; i++) {
+
+    divContainer = document.createElement('div');
+    divContainer.style.backgroundImage = `url("${characters[i].path}"`;
+    divContainer.classList.add('thumbnail');
+    thumbnailArray.push(divContainer);
+    bottomImages.append(divContainer);
+
+    divContainer.addEventListener('click', function () {
+
+        currentImage = thumbnailArray.indexOf(this);
+
+        backgroundImage.setAttribute('src', characters[currentImage].path);
+        nameCharacter.innerText = characters[currentImage].name;
+        infoCharacter.innerText = characters[currentImage].info;
+
+        matchImageAndSelection();
+
+        console.log(currentImage);
+    })
+
+    console.log(thumbnailImage);
+}
+
+console.log(thumbnailArray);
+
+matchImageAndSelection();
 
 nextArrow.addEventListener('click', function () {
 
@@ -47,8 +94,9 @@ nextArrow.addEventListener('click', function () {
     nameCharacter.innerText = characters[currentImage].name;
     infoCharacter.innerText = characters[currentImage].info;
 
-    console.log(currentImage)
+    matchImageAndSelection();
 
+    console.log(currentImage);
 })
 
 prevArrow.addEventListener('click', function () {
@@ -58,7 +106,10 @@ prevArrow.addEventListener('click', function () {
     backgroundImage.setAttribute('src', characters[currentImage].path);
     nameCharacter.innerText = characters[currentImage].name;
     infoCharacter.innerText = characters[currentImage].info;
-    console.log(currentImage)
+
+    matchImageAndSelection();
+
+    console.log(currentImage);
 })
 
-console.log(currentImage)
+console.log(currentImage);
